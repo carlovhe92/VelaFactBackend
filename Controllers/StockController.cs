@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VelaFact.Requests;
 using VelaFact.Responses;
 using VelaFact.Services;
 
@@ -22,8 +23,16 @@ namespace VelaFact.Controllers
 
 
         [HttpGet]
-        public List<ProductResponse> getProducts() {
+        public List<ProductResponse> getProducts()
+        {
             return _stockService.getProductsFromService();
+        }
+
+
+        [HttpPost]
+        public void addUnits([FromBody] AddProductStockResquest request)
+        {
+            _stockService.AddUnitsToProduct(request.Id, request.Count);
         }
     }
 }

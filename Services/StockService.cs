@@ -2,22 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VelaFact.Repositories;
 using VelaFact.Responses;
 
 namespace VelaFact.Services
 {
     public class StockService
     {
-        public List<ProductResponse> getProductsFromService() {
+        readonly StockRepository _stockRepository;
+        public StockService(StockRepository stockRepository)
+        {
+            _stockRepository = stockRepository;
+        }
+
+        public List<ProductResponse> getProductsFromService()
+        {
+
+            var products = _stockRepository.GetProducts();
 
             var response = new List<ProductResponse>();
 
-            response.Add(new ProductResponse(0, "tomate", 500, 8));
-            response.Add(new ProductResponse(0, "cebolla", 600, 10));
-            response.Add(new ProductResponse(0, "pepino", 1000, 11));
-            response.Add(new ProductResponse(0, "aguacate", 3500, 32));
+            foreach (var item in products)
+            {
+                response.Add(new ProductResponse(
+                    item.Id, item.Description, item.Price, item.Units, "frutas")
+                    );
+            }
 
             return response;
+        }
+
+        public void AddUnitsToProduct(int productId, int units)
+        {
+            _stockRepository.AddUnits(productId, units);
         }
     }
 }

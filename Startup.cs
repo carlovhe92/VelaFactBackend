@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using VelaFact.Repositories;
 using VelaFact.Services;
 
 namespace VelaFact
@@ -26,6 +27,7 @@ namespace VelaFact
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<StockRepository>();
             services.AddScoped<StockService>();
             services.AddScoped <CategoryService>();
         }
