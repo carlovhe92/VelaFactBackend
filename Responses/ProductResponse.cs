@@ -7,7 +7,7 @@ namespace VelaFact.Responses
 {
     public class ProductResponse
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
         public int Units { get; set; }
@@ -18,7 +18,7 @@ namespace VelaFact.Responses
 
         }
 
-        public ProductResponse(int id, string description, double price, int units, string category)
+        public ProductResponse(long id, string description, double price, int units, string category)
         {
             Id = id;
             Description = description;

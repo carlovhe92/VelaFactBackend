@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VelaFact.Database;
 using VelaFact.Models;
 
 namespace VelaFact.Repositories
 {
     public class StockRepository
-    {
-        List<Product> Products = new List<Product>() {
-            new Product(0, "tomate", 500, 8, 2),
-            new Product(1, "cebolla", 600, 10, 1),
-            new Product(2, "pepino", 1000, 11, 3),
-            new Product(3, "aguacate", 3500, 32, 2),
-        };
+    {        
+        readonly StockContext _ctx;
+
+        public StockRepository(StockContext ctx)
+        {
+            _ctx = ctx;
+        }
 
         public List<Product> GetProducts()
         {
-            return Products;
+            return _ctx.Products.ToList();
         }
 
         public void AddUnits(int productId, int additionalUnits)
         {
-            foreach (var item in Products)
+            foreach (var item in _ctx.Products.ToList())
             {
                 if (item.Id == productId)
                 {

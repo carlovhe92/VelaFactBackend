@@ -1,31 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace VelaFact.Models
 {
     /* los modelos son entidades para guardar informacion */
+    [Table("Product")]
     public class Product
     {
-        public int Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
         public int Units { get; set; }
-        public int IdCategory { get; set; }
-
-        public Product()
-        {
-
-        }
-
-        public Product(int id, string description, double price, int units, int idCategory)
-        {
-            Id = id;
-            Description = description;
-            Price = price;
-            Units = units;
-            IdCategory = idCategory;
-        }
+        public long IdCategory { get; set; }
     }
 }
